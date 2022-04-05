@@ -1,0 +1,155 @@
+<%- include('header.ejs') %>
+    <title>My Blogs</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <style>
+      body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+    </style>
+  </head>
+  <body class="w3-light-grey">
+  <%- include('navbar.ejs') %>
+  <!-- w3-content defines a container for fixed size centered content, 
+  and is wrapped around the whole page content, except for the footer in this example -->
+  <div class="w3-content" style="max-width:1400px">
+    <!-- Header -->
+    <header class="w3-container w3-center w3-padding-32"> 
+      <h1><b>MY BLOG</b></h1>
+      <p>Welcome, <span class="w3-tag"><%= locals.userName %> !!</span></p>
+    </header>
+    <% if(locals.isLoggedIn) { %>
+      <!-- Alerts Components-->
+      <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+        </symbol>
+        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+        </symbol>
+        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </symbol>
+      </svg>
+      <div class="alert alert-success d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+        <div>
+          Login berhasil !!
+        </div>
+      </div>
+    <% } %>
+    <% if (locals.isLoggedIn === false) { %>
+      <!-- Alerts Components-->
+      <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+        </symbol>
+        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+        </symbol>
+        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </symbol>
+      </svg>
+      <div class="alert alert-warning d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        <div>
+          Anda belum login
+        </div>
+      </div>
+    <% } %>
+
+    <!-- Grid -->
+    <div class="w3-row">
+
+    <!-- Blog entries -->
+      <div class="w3-col l8 s12">
+      <!-- Blog entry -->
+        <% articles.forEach((article) => {%>
+        <div class="w3-card-4 w3-margin w3-white">
+          <% const image = article.title + ".jpg" %>
+          <img src="/images/<%= image %>" alt="Nature" style="width:100%">
+          <div class="w3-container">
+            <h3><b><%= article.title %></b></h3>
+            <h5><span class="w3-opacity"><%= article.location %></span></h5>
+          </div>
+          <div class="w3-container">
+            <p>Ingin membaca artikel dan melihat ulasan-ulasannya? Klik tombol dibawah, ya !!</p>
+            <div class="w3-row">
+              <div class="w3-col m8 s12">
+                <p><button class="w3-button w3-padding-large w3-white w3-border"><a href="/detail/<%= article.id %>"><b>READ MORE »</b></a></button></p>
+              </div>
+              <div class="w3-col m4 w3-hide-small">
+                <% if (locals.isLoggedIn && article.user_id === userID) { %>
+                <form action="/hapus/<%= article.id %>" method="post">
+                  <input type="submit" value="hapus">
+                </form>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <%})%>
+      </div>
+      <!-- Introduction menu -->
+      <div class="w3-col l4">
+        <!-- About Card -->
+        <div class="w3-card w3-margin w3-margin-top">
+          <img src="/images/Wonderful Indonesia.jpg" style="width:100%">
+          <div class="w3-container w3-white">
+            <h6><b>Indonesia is Very Wonderful</b><p class="w3-opacity"></p></h6>
+            <p>Indonesia is a country blessed with countless wonders. What makes this country unique is its diverse culture and magnificent nature, which should be celebrated and preserved by everyone. Therefore, The Ministry of Tourism and Creative Economy of the Republic of Indonesia presents Wonderful Indonesia, a promise to make Indonesia a place where everyone can enjoy its natural and cultural wonders.</p>
+            <p><i>Source: https://www.indonesia.travel/nl/en/general-information/wonderful-indonesia</i></p>
+          </div>
+        </div>
+        <hr>
+        <!-- Posts -->
+        <div class="w3-card w3-margin">
+          <div class="w3-container w3-padding">
+            <h4>Popular Posts</h4>
+          </div>
+          <ul class="w3-ul w3-hoverable w3-white">
+            <% articles.forEach((article) => { %>
+              <li class="w3-padding-16">
+                <% const image = article.title + ".jpg" %> 
+                <img src="/images/<%= image %>" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+                <span class="w3-large"><%= article.title %></span><br>
+                <span>at <%= article.location %></span>
+              </li>
+            <% }) %>
+          </ul>
+          <% if(locals.isLoggedIn){ %>
+            <div class="alert alert-info" role="alert">
+              <a href="/tambah/<%= locals.userID %>" class="alert-link">Buat Artikel</a>. Give it a click if you want to share your stories
+            </div>
+          <% } %>
+          <% if(locals.isLoggedIn === false) { %>
+            <div class="alert alert-info" role="alert">
+              <a href="/users/signup" class="alert-link">Buat Artikel</a>. Give it a click if you want to share your stories, <b>but Register or Login first</b>
+            </div>
+          <% } %>
+        </div>
+        <hr> 
+        <!-- Labels / tags -->
+        <div class="w3-card w3-margin">
+          <div class="w3-container w3-padding">
+            <h4>Places</h4>
+          </div>
+          <div class="w3-container w3-white">
+            <p>
+              <% articles.forEach((article) => { %>
+                <span class="w3-tag w3-light-grey w3-small w3-margin-bottom"><%= article.location %></span>
+              <% }) %>
+            </p>
+          </div>
+        </div> 
+        <!-- END Introduction Menu -->
+      </div>
+    <!-- END GRID -->
+    </div>
+    <br>
+  <!-- END w3-content -->
+  </div>
+  <% console.log("Ini testing!!") %>
+  <% console.log(articles) %>
+<%- include('footer.ejs') %>

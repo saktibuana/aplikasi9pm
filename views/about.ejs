@@ -1,0 +1,32 @@
+<%- include('header.ejs') %>
+        <title>Details Articles</title>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            body {font-family: "Lato", sans-serif}
+            .mySlides {display: none}
+        </style>
+    </head>
+    <body>
+        <%- include('navbar.ejs') %>
+        <!-- Header -->
+<header class="w3-display-container w3-content w3-wide" style="max-width:1500px;" id="home">
+    <img class="w3-image" src="/images/Pantai.jpg %>" alt="Architecture" width="1500" height="800">
+    <div class="w3-display-middle w3-margin-top w3-center">
+      <h1 class="w3-xxlarge w3-text-white"><span class="w3-padding w3-black w3-opacity-min"><b>About</b></span> <span class="w3-hide-small w3-text-light-grey">this Website</span></h1>
+    </div>
+  </header>
+    <!-- Page content -->
+    <!-- The Band Section -->
+    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+      <h3 class="w3-wide">We Travel the World, and Share It</h3>
+      <p class="w3-opacity"><i>So, let's join us !!</i></p>
+      <p class="w3-justify">Website ini dibuat sebagai wadah bagi para pecinta <i>jalan-jalan</i> agar dapat saling berbagi cerita. Bukan hanya sekedar berbagi, tetapi juga saling berargumentasi. Mimin tunggu ceritamu !!</p>
+      <div class="alert alert-info" role="alert">
+        <a href="/users/signup" class="alert-link">Mulai berbagi cerita dan ulasan.</a>Dengan <i>meng</i>-klik tautan tersebut, anda akan memiliki fitur-fitur seperti menambahkan artikel, menambahkan ulasan, dan menghapus artikel !!
+      </div>  
+    </div>
+</div>
+<%- include('footer.ejs') %>
